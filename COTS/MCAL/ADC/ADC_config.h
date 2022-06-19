@@ -1,0 +1,9 @@
+
+#ifndef MCAL_ADC_ADC_CONFIG_H_
+#define MCAL_ADC_ADC_CONFIG_H_
+
+
+#define ADC_PRESCALAR   		PRESCALAR_DIV_128
+#define VOLTAGE_REFERENCE 		AVCC
+
+#endif
