@@ -15,7 +15,12 @@ void ADC_voidInit(void)
 	//0 1 AVCC with external capacitor at AREF pin
 	CLR_BIT( ADMUX , ADMUX_REFS1);
 	SET_BIT( ADMUX , ADMUX_REFS0);
-//#elif VOLTAGE_REFERENCE == AREF
+#elif VOLTAGE_REFERENCE == AREF
+	CLR_BIT( ADMUX , ADMUX_REFS1);
+	CLR_BIT( ADMUX , ADMUX_REFS0);
+#elif VOLTAGE_REFERENCE ==	INTERNAL_2_56V
+	SET_BIT( ADMUX , ADMUX_REFS1);
+	SET_BIT( ADMUX , ADMUX_REFS0);
 #endif
 
 	//Bits 2:0 – ADPS2:0: ADC Prescaler Select Bits	
@@ -30,6 +35,8 @@ void ADC_voidInit(void)
 
 
 }
+
+
 void ADC_voidAssignDivisionFactor(u8 Copy_DivisionFactor)
 {
 	if(Copy_DivisionFactor <= 7)
@@ -40,8 +47,10 @@ void ADC_voidAssignDivisionFactor(u8 Copy_DivisionFactor)
 		ADCSRA |= Copy_DivisionFactor;	//Sets the last 3-Bits as prescalar value
 	}
 }
+
 u8 Global_AdcState = NOT_BUSY;
-u8 ADC_u16StartConversionSynchronous(u8 Copy_u8ChannelNum)
+
+u8 ADC_u8StartConversionSynchronous(u8 Copy_u8ChannelNum)
 {
 	if(Global_AdcState == BUSY){
 		return 0;
@@ -66,6 +75,7 @@ u8 ADC_u16StartConversionSynchronous(u8 Copy_u8ChannelNum)
 		
 		Global_AdcState = NOT_BUSY ;
 		
+		/*TODO : Return all of the 10 bits*/
 		//Local_u16DigitalOutput = ADCL | (0x0300 & ADCH);
 		return ADCH;
 	}

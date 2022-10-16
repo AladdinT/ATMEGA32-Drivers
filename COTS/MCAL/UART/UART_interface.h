@@ -1,27 +1,53 @@
-/*
- * UART_interface.h
+/**********************************************************************************************************************
+
+ *  FILE DESCRIPTION
+ *  -------------------------------------------------------------------------------------------------------------------
+ *         File:  UART_interface.h
+ *       Module:  Universal Asynchronous Transmitter Receiver (UART)
  *
- *  Created on: Oct 5, 2021
- *      Author: ahmad
- */
+ *  Description:  This file has : -all macros that users may need
+ *  							  -Module Functions description and declarations
+ *  Created on: 	Oct 5, 2021
+ *  Latest update : Oct 9, 2022
+ *  Author : Ahmad Tohamy
+ *********************************************************************************************************************/
 
 #ifndef MCAL_UART_UART_INTERFACE_H_
 #define MCAL_UART_UART_INTERFACE_H_
 
-#define _8_MHz		8000000
-#define _1_MHz		1000000
 
-#define PM_Disabled		0
-#define PM_Enabled		1
+/**********************************************************************************************************************
+ *  GLOBAL FUNCTION PROTOTYPES
+ *********************************************************************************************************************/
 
-#define ENABLE			1
-#define DISABLE			0
-
+/*
+ * Name 	   : UART_voidInit()
+ * Description : initialize UART with pre-configured parameter
+ * 				 (FOR THE MOMENT : uart is initialized to connect with HC-05 Bluetooth module)
+ * 				 TODO : 1) Make this driver configurable 2) Create BT driver at HAL layer
+ * Arguments   : TODO : configured with UART_config.h
+ * return      : void
+ */
 void UART_voidInit(void);
-void UART_voidTransmitAsynchronous( u8 Copy_u8Data );
+
+/*
+ * Name		   : UART_u8ReceiveAsynchronous()
+ * Description : synchronous function that receives 1 byte over UART
+ * Arguments   : void
+ * return      : u8 received byte
+ */
 u8 UART_u8ReceiveAsynchronous(void);
+
+
+
+
+void UART_voidTransmitAsynchronous( u8 Copy_u8Data );
 void UART_voidReceiveString(u8 *str);
 void UART_voidTransmitString(u8 *str);
 
 
 #endif /* MCAL_UART_UART_INTERFACE_H_ */
+
+/**********************************************************************************************************************
+ *  END OF FILE: UART_interface.h
+ *********************************************************************************************************************/

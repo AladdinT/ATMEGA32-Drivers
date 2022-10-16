@@ -6,25 +6,26 @@
  */
 #include "../../LIB/BitMath.h"
 #include "../../LIB/StdTypes.h"
+#include "DIO_interface.h"
 #include "DIO_private.h"
 #include "DIO_config.h"
 
 void DIO_SetPinValue(u8 Port ,u8 Pin , u8 value){
 	if(value == 1){
 		switch(Port){
-		case 0 :
+		case DIO_PORTA :
 			SET_BIT(PORTA,Pin);
 			break;
 
-		case 1:
+		case DIO_PORTB:
 			SET_BIT(PORTB,Pin);
 			break;
 
-		case 2:
+		case DIO_PORTC:
 			SET_BIT(PORTC,Pin);
 			break;
 
-		case 3:
+		case DIO_PORTD:
 			SET_BIT(PORTD,Pin);
 			break;
 
@@ -32,19 +33,19 @@ void DIO_SetPinValue(u8 Port ,u8 Pin , u8 value){
 	}else{
 		switch(Port){
 
-		case 0:
+		case DIO_PORTA:
 			CLR_BIT(PORTA,Pin);
 			break;
 
-		case 1:
+		case DIO_PORTB:
 			CLR_BIT(PORTB,Pin);
 			break;
 
-		case 2:
+		case DIO_PORTC:
 			CLR_BIT(PORTC,Pin);
 			break;
 
-		case 3:
+		case DIO_PORTD:
 			CLR_BIT(PORTD,Pin);
 			break;
 
@@ -123,9 +124,9 @@ u8 DIO_GetPortValue(u8 Port){
 	return ret ;
 }
 
-void DIO_SetPinDirection(u8 Direct, u8 Pin, u8 value){
-	if(value == 1){
-		switch(Direct){
+void DIO_SetPinDirection(u8 Port, u8 Pin, u8 Direction){
+	if(Direction == 1){
+		switch(Port){
 		case 0 :
 			SET_BIT(DDRA,Pin);
 			break;
@@ -144,7 +145,7 @@ void DIO_SetPinDirection(u8 Direct, u8 Pin, u8 value){
 
 		}
 	}else{
-		switch(Direct){
+		switch(Port){
 
 		case 0:
 			CLR_BIT(DDRA,Pin);
@@ -167,8 +168,8 @@ void DIO_SetPinDirection(u8 Direct, u8 Pin, u8 value){
 
 
 }
-void DIO_SetPortDirection(u8 Direct , u8 value){
-	switch(Direct){
+void DIO_SetPortDirection(u8 Port , u8 value){
+	switch(Port){
 	case 0:
 		DDRA = value;
 		break;
