@@ -1,9 +1,9 @@
 #include "../../lib/stdtypes.h"
 #include "../../lib/bitmath.h"
+
 #include "ADC_interface.h"
 #include "ADC_private.h"
 #include "ADC_config.h"
-
 void ADC_voidInit(void)
 {
 //ADMUX
@@ -50,12 +50,15 @@ void ADC_voidAssignDivisionFactor(u8 Copy_DivisionFactor)
 
 u8 Global_AdcState = NOT_BUSY;
 
-u8 ADC_u8StartConversionSynchronous(u8 Copy_u8ChannelNum)
+u16 ADC_u16StartConversionSynchronous(u8 Copy_u8ChannelNum)
 {
 	if(Global_AdcState == BUSY){
 		return 0;
 	}else{
-//		u16 Local_u16DigitalOutput = 0 ;
+		u16 Local_u16DigitalOutput = 0 ;
+		u8 ADCH_v;
+		u8 ADCL_v;
+
 		Global_AdcState = BUSY ;
 		//Assign Channel Number to ADMUX Register BY BIT MASKING
 		ADMUX 	&= 	MULTIPLIXER_MASK;	//Clear Last 5-Bits`
@@ -75,9 +78,14 @@ u8 ADC_u8StartConversionSynchronous(u8 Copy_u8ChannelNum)
 		
 		Global_AdcState = NOT_BUSY ;
 		
-		/*TODO : Return all of the 10 bits*/
-		//Local_u16DigitalOutput = ADCL | (0x0300 & ADCH);
-		return ADCH;
+		/*Return all of the 10 bits*/
+		ADCL_v = ADCL;
+		ADCH_v = ADCH;
+
+
+		Local_u16DigitalOutput = (ADCH_v << 2) | (ADCL_v >> 6);
+		
+		return Local_u16DigitalOutput;
 	}
 	
 

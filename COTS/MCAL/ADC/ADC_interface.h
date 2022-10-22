@@ -8,7 +8,7 @@
  *  Description:  This file has : -all macros that users may need
  *  							  -Module Functions description and declarations
  *  Created on: 	Sep 22, 2021
- *  Latest update : Oct 16, 2022
+ *  Latest update : Oct 22, 2022
  *  Author : Ahmad Tohamy
  *********************************************************************************************************************/
 
@@ -67,9 +67,9 @@ void ADC_voidInit(void);
  * Name   		: ADC_u8StartConversionSynchronous
  * Description 	: If ADC is not busy, Start conversion and Poll untill it is done
  * Arguments   	: Copy_u8ChannelNum:  takes only DIO_PORTA, DIO_PORTB, DIO_PORTC,  DIO_PORTD
- * return      	: returns most segneficant 8 bits out of 10 of the Digitalized Data
+ * return      	: returns the 10 bits of the Digitalized Data
  */
-u8 ADC_u8StartConversionSynchronous(u8 Copy_u8ChannelNum);
+u16 ADC_u16StartConversionSynchronous(u8 Copy_u8ChannelNum);
 
 
 u16 ADC_u16StartConversionAsynchronous(u8 Copy_u8ChannelNum);
