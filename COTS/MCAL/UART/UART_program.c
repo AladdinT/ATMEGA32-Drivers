@@ -67,3 +67,62 @@ void UART_voidTransmitString(u8 *str)
 		i++;
 	}
 }
+
+
+void static intToString (s32 myint , char * mystr)
+{
+	char revStr[12];
+	u8 arr_size = 0;
+	/*Check if 0 , just return 0*/
+	if(myint == 0)
+	{
+		*mystr = '0';
+		*(mystr + 1) = '\0';
+		return;
+	}
+	else if (myint > 0)
+	{
+		/*In case of positive number*/
+		u8 i = 0;
+		while(myint != 0)
+		{
+			revStr[i] = (myint % 10) +'0'; //get least significant digit
+			myint /= 10; //Move decimal point to left
+			i++;
+		}
+		/*Terminate the string with a null char*/
+		revStr[i] = '\0';
+		arr_size = i;
+	}
+	else if (myint < 0)
+	{
+		/*In case of negative number*/
+		u8 i = 0;
+		myint*= -1; //just make it positive
+		while(myint != 0)
+		{
+			revStr[i] = (myint % 10)+'0'; //get least significant digit
+			myint /= 10; //Move decimal point to left
+			i++;
+		}
+		/*Terminate the string with a negative sign and a null char*/
+		revStr[i] = '-';
+		i++;
+		revStr[i] = '\0';
+		arr_size = i;
+	}
+	/*Reverse the string back to order*/
+	for(u8 i=0 ; i < arr_size ; i++)
+	{
+        mystr[i] = revStr[arr_size -1 -i];
+	}
+	mystr[arr_size] = '\0';
+
+}
+
+void UART_voidTransmitNumber(s32 Copy_u32Number)
+{
+	u8 myStr[15];
+	intToString(Copy_u32Number, myStr);
+	UART_voidTransmitString(myStr);
+}

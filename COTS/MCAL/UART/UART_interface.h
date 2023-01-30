@@ -44,6 +44,7 @@ u8 UART_u8ReceiveAsynchronous(void);
 void UART_voidTransmitAsynchronous( u8 Copy_u8Data );
 void UART_voidReceiveString(u8 *str);
 void UART_voidTransmitString(u8 *str);
+void UART_voidTransmitNumber(s32 Copy_u32Number);
 
 
 #endif /* MCAL_UART_UART_INTERFACE_H_ */

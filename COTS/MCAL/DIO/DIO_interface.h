@@ -8,7 +8,7 @@
  *  Description:  This file has : -all macros that users may need
  *  							  -Module Functions description and declarations
  *  Created on: 	Aug 23, 2021
- *  Latest update : Oct 9, 2022
+ *  Latest update : Jan 27, 2023
  *  Author : Ahmad Tohamy
  *********************************************************************************************************************/
 
@@ -44,12 +44,13 @@
 #define DIO_PIN7 	(7)
 
 /*Function Parameters*/
-#define DIO_HIGH  		 	(1)
-#define DIO_LOW  		 	(0)
-#define DIO_OUTPUT	 		1
-#define DIO_INPUT			0
-#define DIO_PULL_UP			1
-#define DIO_FLOATING		0
+#define DIO_HIGH  		 		(1)
+#define DIO_LOW  		 		(0)
+#define DIO_OUTPUT		 		1		//1 pin as Output
+#define DIO_OUTPUT_PORT			0xFF 	//the whole port is output
+#define DIO_INPUT				0
+#define DIO_PULL_UP				1
+#define DIO_FLOATING			0
 
 
 /**********************************************************************************************************************
